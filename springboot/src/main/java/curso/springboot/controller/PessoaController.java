@@ -15,12 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 import curso.springboot.model.Pessoa;
 import curso.springboot.model.Telefone;
 import curso.springboot.repository.PessoaRepository;
+import curso.springboot.repository.TelefoneRepository;
 
 @Controller
 public class PessoaController {
 	
 	@Autowired
 	private PessoaRepository pessoaRepository; //Após criar o Repository pessoa, tem que vir na controller e fazer a injeção de dependencia
+	
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 	
 	/**Metodo para enviar para a pagina de cadastro*/
 	@RequestMapping(method=RequestMethod.GET, value="/cadastropessoa")
@@ -125,7 +129,14 @@ public class PessoaController {
 	@PostMapping("**/addfonepessoa/{pessoaid}")
 	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
 		
+		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
+		telefone.setPessoa(pessoa);
+		
+		telefoneRepository.save(telefone);
+		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa);
+ 		
 		
 		return modelAndView;
 	}
