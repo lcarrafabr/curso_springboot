@@ -30,6 +30,11 @@ public class PessoaController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		//----------------------------------------------------------------------------
+		
+		/**Essas linhas abaixo são para carregar os dados automaticamente ao abrir o fomulario*/
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		modelAndView.addObject("pessoas", pessoasIt);
+		
 		return modelAndView;
 	}
 	
@@ -100,6 +105,18 @@ public class PessoaController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
 		modelAndView.addObject("pessoaobj", new Pessoa());
+		
+		return modelAndView;
+	}
+	
+	
+	@GetMapping("telefones/{idpessoa}")
+	public ModelAndView telefones(@PathVariable("idpessoa") Long idpessoa) {//no pathvariable uso o id que coloquei no html na grade editar <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+		
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);//O findById retona um Optional.
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa.get());
 		
 		return modelAndView;
 	}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="/materialize\css\materialize.css"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="/materialize\css\materialize.min.css"  media="screen,projection"/>
+<title>Cadastro Telefones</title>
+
+<style type="text/css">
+
+form input[type=submit]{
+	color: white;
+}
+</style>
+
+</head>
+<body>
+	<nav>
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo">Cadastro de telefones</a>
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="/">Home</a></li>
+			<li><a href="/cadastropessoa">Cadastro pessoa</a></li>
+			<li><a href="collapsible.html">JavaScript</a></li>
+		</ul>
+	</div>
+	</nav>
+	<div class="container">
+	
+	<div th:each="p: ${pessoaobj}">
+		<div class="row">
+			<p>Id: <span th:text="${p.id}"></span> </p>
+			<p>Nome: <span th:text="${p.nome}"></span> </p>
+			<p>Sobrenome: <span th:text="${p.sobrenome}"></span> </p>
+			<p>Idade: <span th:text="${p.idade}"></span> </p>
+		</div>
+	
+	</div>
+
+
+
+		<!--JavaScript at end of body for optimized loading-->
+		<script type="text/javascript" src="/materialize\js\materialize.js"></script>
+		<script type="text/javascript"
+			src="/materialize\js\materialize.min.js"></script>
+	</div>
+</body>
+</html>

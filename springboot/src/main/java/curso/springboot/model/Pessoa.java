@@ -1,12 +1,14 @@
 package curso.springboot.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -24,6 +26,10 @@ public class Pessoa implements Serializable {
 	private String nome;
 	@Column(length=210)
 	private String sobrenome;
+	
+	/**Criar essa lista após criar a classe de relação. Se um para muitos, criar essa linha após existir a classe muitos*/
+	@OneToMany(mappedBy="pessoa") //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)
+	private List<Telefone> telefones; //Usado para relacionar um para muitos (no caso uma pessoa para muitos telefones)
 	
 	private int idade;
 
@@ -57,6 +63,14 @@ public class Pessoa implements Serializable {
 	
 	public int getIdade() {
 		return idade;
+	}
+	
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+	
+	public List<Telefone> getTelefones() {
+		return telefones;
 	}
 
 }
