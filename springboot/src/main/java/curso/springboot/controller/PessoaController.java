@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import curso.springboot.model.Pessoa;
+import curso.springboot.model.Telefone;
 import curso.springboot.repository.PessoaRepository;
 
 @Controller
@@ -117,6 +118,14 @@ public class PessoaController {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
+		
+		return modelAndView;
+	}
+	
+	@PostMapping("**/addfonepessoa/{pessoaid}")
+	public ModelAndView addFonePessoa(Telefone telefone, @PathVariable("pessoaid") Long pessoaid) {
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		
 		return modelAndView;
 	}
