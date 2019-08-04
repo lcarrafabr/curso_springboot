@@ -3,6 +3,7 @@ package curso.springboot.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Pessoa implements Serializable {
 	private String sobrenome;
 	
 	/**Criar essa lista após criar a classe de relação. Se um para muitos, criar essa linha após existir a classe muitos*/
-	@OneToMany(mappedBy="pessoa") //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)
+	@OneToMany(mappedBy="pessoa", orphanRemoval=true, cascade=CascadeType.ALL) //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)
 	private List<Telefone> telefones; //Usado para relacionar um para muitos (no caso uma pessoa para muitos telefones)
 	
 	private int idade;

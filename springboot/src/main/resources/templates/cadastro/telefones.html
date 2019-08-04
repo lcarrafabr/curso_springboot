@@ -63,6 +63,27 @@ form input[type=submit]{
 				<input class="waves-effect waves-light btn" type="submit" value="Adicionar"/>
 			</div>
 		</form>
+		
+		<table class="striped">
+			<thead>
+          <tr>
+             <!-- <th>Id</th> -->
+              <th>DDD</th>
+              <th>numero</th>
+              <th>tipo</th>
+              <th>Editar</th>
+              <th>Remover</th>
+          </tr>
+        </thead>
+			<tr th:each="fone: ${telefones}">
+				<td th:text="${fone.ddd}"></td>
+				<td th:text="${fone.numero}"></td>
+				<td th:text="${fone.tipo}"></td>
+				<td><a th:href="@{/editartelefone/{idtelefone}(idtelefone=${fone.id})}"><i class="material-icons center">edit</i></a></td>
+    			<td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}"><i class="material-icons center">delete_forever</i></a></td>
+			</tr>		
+		</table>
+		
 	</div>
 
 

@@ -123,6 +123,8 @@ public class PessoaController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
 		
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));//Colocar para carregar todos os telefones ao abrir a tela
+		
 		return modelAndView;
 	}
 	
@@ -136,7 +138,39 @@ public class PessoaController {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid)); //Necessario para c arregar a lista de telefones por pessoa (necessario atualiar repository)
  		
+		
+		return modelAndView;
+	}
+	
+	
+	/**metodo Excluir*/
+	/**GetMapping é a mesma coisa do requestMapping porpem já informo que o tipo é GET*/
+	@GetMapping("removertelefone/{idtelefone}")
+	public ModelAndView removerTelefone(@PathVariable("idtelefone") Long idtelefone) {//no pathvariable uso o id que coloquei no html na grade editar <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+		
+		Pessoa pessoa = telefoneRepository.findById(idtelefone).get().getPessoa();//carrego o objeto pessoa para a variavel pessoa.
+		
+		telefoneRepository.deleteById(idtelefone);//Deleto o telefone
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");//Volto para a mesma tela
+		modelAndView.addObject("pessoaobj", pessoa);//carrego a pessoa novamente
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoa.getId()));//carrega os telefones dessa pessoa
+		
+		return modelAndView;
+	}
+	
+	/**Metodo Editar*/
+	/**GetMapping é a mesma coisa do requestMapping porpem já informo que o tipo é GET*/
+	@GetMapping("editartelefone/{idtelefone}")
+	public ModelAndView editarTelefone(@PathVariable("idtelefone") Long idtelefone) {//no pathvariable uso o id que coloquei no html na grade editar <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+		
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idtelefone);//O findById retona um Optional.
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa.get());
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idtelefone));//carrega os telefones dessa pessoa
 		
 		return modelAndView;
 	}
