@@ -42,7 +42,10 @@ form input[type=submit]{
 	</div>
 	
 	<div class="row">
-		<form th:action="@{/addfonepessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
+	<div th:each="m : ${msg}">
+			<span th:text="${m}"/>
+		</div>
+		<form th:action="@{/addfonepessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12" onsubmit="return validarCampos()? true : false;">
 		
 			<div class="row">
 				<div class="input-field col s1">
@@ -90,8 +93,33 @@ form input[type=submit]{
 
 		<!--JavaScript at end of body for optimized loading-->
 		<script type="text/javascript" src="/materialize\js\materialize.js"></script>
-		<script type="text/javascript"
-			src="/materialize\js\materialize.min.js"></script>
+		<script type="text/javascript" src="/materialize\js\materialize.min.js"></script>
+		
+		<script type="text/javascript">
+			function validarCampos(){
+				
+				ddd = document.getElementById('ddd').value;
+				numero = document.getElementById('numero').value;
+				tipo = document.getElementById('tipo').value;
+				
+				if(ddd === ''){
+					alert('O DDD é obrigatório!');
+					return false;
+				}else if(numero === ''){
+					alert('O numero é obrigatório!');
+					return false;
+				}else if(tipo === ''){
+					alert('O Tipo é obrigatório!');
+					return false;
+				}
+				
+				
+				
+				
+				
+				return true;
+			}
+		</script>
 	</div>
 </body>
 </html>

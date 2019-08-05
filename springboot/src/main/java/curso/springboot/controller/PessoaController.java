@@ -160,6 +160,20 @@ public class PessoaController {
 		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
 		telefone.setPessoa(pessoa);
 		
+		/**Validaçãoes pelo lado do servidor*/
+		if(telefone != null && (telefone.getNumero() != null && telefone.getNumero().isEmpty()) || telefone.getNumero() == null) {
+			
+			ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+			modelAndView.addObject("pessoaobj", pessoa);
+			modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+			
+			List<String> msg = new ArrayList<>();
+			msg.add("O numero de telefone deve ser informado!");
+			modelAndView.addObject("msg", msg);
+			
+			return modelAndView;
+		}
+		
 		telefoneRepository.save(telefone);
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
