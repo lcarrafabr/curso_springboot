@@ -1,5 +1,6 @@
 package curso.springboot.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,12 +8,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private ImplementacaoUserDetailService implementacaoUserDetailService; // Usar essa linha quando for validar no banco
 	
 	@Override //Configura as solicitações de acesso por HTTP
 	protected void configure(HttpSecurity http) throws Exception {
@@ -30,10 +35,19 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 	@Override //Cria autenticação do usuario com banco de dados ou em memoria
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
-		.withUser("vitiazze")
-		.password("123")
-		.roles("ADMIN");
+		
+		/**usar as linhas abaixo para validar no banco de dados o usuario*/
+		auth.userDetailsService(implementacaoUserDetailService)
+		.passwordEncoder(new BCryptPasswordEncoder());
+		
+		
+		
+		/**usar as linhas comentadas quando for usar validação em memoria*/
+		//auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()) // se for usar em memoria
+		//auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()) //Usar essa linha  para usar senha criptografada
+		//.withUser("vitiazze")
+		//.password("123")
+		//.roles("ADMIN");
 	}
 	
 	@Override //Ignora URL especificas
