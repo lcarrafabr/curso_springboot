@@ -45,7 +45,7 @@ form input[type=submit]{
 	<div th:each="m : ${msg}">
 			<span th:text="${m}"/>
 		</div>
-		<form th:action="@{/addfonepessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12" onsubmit="return validarCampos()? true : false;">
+		<form th:action="@{/addfonepessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12" onsubmit="return validarCampos()? true : false;" >
 		
 			<div class="row">
 				<div class="input-field col s1">

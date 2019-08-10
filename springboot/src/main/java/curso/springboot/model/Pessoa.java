@@ -37,7 +37,7 @@ public class Pessoa implements Serializable {
 	private String sobrenome;
 	
 	/**Criar essa lista após criar a classe de relação. Se um para muitos, criar essa linha após existir a classe muitos*/
-	@OneToMany(mappedBy="pessoa", orphanRemoval=true, cascade=CascadeType.ALL) //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)
+	@OneToMany(mappedBy="pessoa", orphanRemoval=false, cascade=CascadeType.ALL) //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)(Deixar o orphanRemoval false para conseguir editar pessoa, ao deletar a pessoa o telefone tbm é deletado)
 	private List<Telefone> telefones; //Usado para relacionar um para muitos (no caso uma pessoa para muitos telefones)
 	
 	@Min(value = 18, message="A idade não pode ser menor que 18 anos")

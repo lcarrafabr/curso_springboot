@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!--Import Google Icon Font-->
@@ -21,7 +22,7 @@ form input[type=submit]{
 	<body>
 	
 	
-	
+	<div class="navbar-fixed">
 	<nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Cadastro de pessoa</a>
@@ -32,6 +33,7 @@ form input[type=submit]{
       </ul>
     </div>
   </nav>
+  </div>
   <div class="container">
   
   </br></br>
@@ -54,18 +56,18 @@ form input[type=submit]{
     		
     		<div class="input-fiel col s6">
     		<label for="nome" class="active">Nome</label>
-    		<input id="nome" name="nome" placeholder="Nome" th:field="*{nome}" class="validate"/>
+    		<input id="nome" name="nome" placeholder="Nome" th:field="*{nome}" class="validate" required="required"/>
     	</div>
     	</div>
     	
-		<div class="row">
+		<div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
 			<div class="input-fiel col s10">
     			<label for="sobrenome" class="active">Sobrenome</label>
-    			<input id="sobrenome" name="sobrenome" placeholder="Sobrenome" th:field="*{sobrenome}" class="validate"/>
+    			<input id="sobrenome" name="sobrenome" placeholder="Sobrenome" th:field="*{sobrenome}" class="validate"required="required"/>
     		</div>
     		<div class="input-fiel col s2">
     			<label for="idade" class="active">Idade</label>
-    			<input id="idade" name="idade" placeholder="Idade" th:field="*{idade}" class="validate"/>
+    			<input id="idade" name="idade" placeholder="Idade" th:field="*{idade}" class="validate"required="required"/>
     	</div>
     	</div>
     	
@@ -96,7 +98,7 @@ form input[type=submit]{
 		</div>
 
 
-		<table class="striped">
+		<table class="striped centered responsive-table">
     	<thead>
           <tr>
              <!-- <th>Id</th> -->

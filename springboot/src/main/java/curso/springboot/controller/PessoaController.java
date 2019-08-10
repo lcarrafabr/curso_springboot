@@ -112,6 +112,7 @@ public class PessoaController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoaobj", pessoa.get());
 		
+		
 		return modelAndView;
 	}
 	
@@ -206,7 +207,7 @@ public class PessoaController {
 	@GetMapping("editartelefone/{idtelefone}")
 	public ModelAndView editarTelefone(@PathVariable("idtelefone") Long idtelefone) {//no pathvariable uso o id que coloquei no html na grade editar <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
 		
-		Optional<Pessoa> pessoa = pessoaRepository.findById(idtelefone);//O findById retona um Optional.
+		Optional<Telefone> pessoa = telefoneRepository.findById(idtelefone);//O findById retona um Optional.
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
