@@ -28,8 +28,8 @@ form input[type=submit]{
       <a href="#" class="brand-logo">Cadastro de pessoa</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="#l">Components</a></li>
+        <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -106,7 +106,7 @@ form input[type=submit]{
               <th>Sobrenome</th>
               <th>Idade</th>
               <th>Editar</th>
-              <th>Remover</th>
+              <th sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_GERENTE', 'ROLE_USER')">Remover</th>
           </tr>
         </thead>
     	<tr th:each = "pessoa : ${pessoas}">
@@ -115,7 +115,7 @@ form input[type=submit]{
     		<td th:text = "${pessoa.sobrenome}"></td>
     		<td th:text = "${pessoa.idade}"></td>
     		<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}"><i class="material-icons center">edit</i></a></td>
-    		<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}"><i class="material-icons center">delete_forever</i></a></td>
+    		<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}"><i class="material-icons center" sec:authorize="hasRole('ROLE_ADMIN')">delete_forever</i></a></td>
     	</tr>
     </table>
     

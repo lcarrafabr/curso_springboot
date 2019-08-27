@@ -29,7 +29,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 		.antMatchers(HttpMethod.GET, "/cadastropessoa").hasAnyRole("ADMIN")//Travei a pagina cadastropessoa somente para admin (não informa o ROLE_)
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()//Permite qualquer usuário no formulario de login
-		.and().logout()//Mapeia URL de Logout e invalida usuario autenticado
+		.loginPage("/login")//Somente usar essa linha quando existir uma pagina de login (se não usar o spring cria uma pagina de login
+		.defaultSuccessUrl("/cadastropessoa")//Quando o login for realizado com sucesso ir direto para a pagina cadastro pessoa
+		.failureUrl("/login?error=true")//Se falhar, voltar para a pagina de login e enviar um parametro error=true
+		//.and().logout()//Mapeia URL de Logout e invalida usuario autenticado (Usar quando for logout em memoria
+		.and().logout().logoutSuccessUrl("/cadastro/login")//Quando for deslogado com sucesso, voltar a pagina de login criada por mim
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
