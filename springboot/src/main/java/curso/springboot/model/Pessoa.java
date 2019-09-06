@@ -40,6 +40,18 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy="pessoa", orphanRemoval=false, cascade=CascadeType.ALL) //MappedBy mapeia para o nome da variavel em que criou na tela telefones (private Pessoa pessoa;)(Deixar o orphanRemoval false para conseguir editar pessoa, ao deletar a pessoa o telefone tbm é deletado)
 	private List<Telefone> telefones; //Usado para relacionar um para muitos (no caso uma pessoa para muitos telefones)
 	
+	private String cep;
+	
+	private String rua;
+	
+	private String bairro;
+	
+	private String cidade;
+	
+	private String uf;
+	
+	private String ibge;
+	
 	@Min(value = 18, message="A idade não pode ser menor que 18 anos")
 	private int idade;
 
@@ -81,6 +93,56 @@ public class Pessoa implements Serializable {
 	
 	public List<Telefone> getTelefones() {
 		return telefones;
+		
+		
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getIbge() {
+		return ibge;
+	}
+
+	public void setIbge(String ibge) {
+		this.ibge = ibge;
 	}
 
 }

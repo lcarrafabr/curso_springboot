@@ -30,10 +30,10 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()//Permite qualquer usuário no formulario de login
 		.loginPage("/login")//Somente usar essa linha quando existir uma pagina de login (se não usar o spring cria uma pagina de login
-		.defaultSuccessUrl("/cadastropessoa")//Quando o login for realizado com sucesso ir direto para a pagina cadastro pessoa
+		.defaultSuccessUrl("/")//Quando o login for realizado com sucesso ir direto para a pagina cadastro pessoa (mudei para index)
 		.failureUrl("/login?error=true")//Se falhar, voltar para a pagina de login e enviar um parametro error=true
 		//.and().logout()//Mapeia URL de Logout e invalida usuario autenticado (Usar quando for logout em memoria
-		.and().logout().logoutSuccessUrl("/cadastro/login")//Quando for deslogado com sucesso, voltar a pagina de login criada por mim
+		.and().logout().logoutSuccessUrl("/login")//Quando for deslogado com sucesso, voltar a pagina de login criada por mim
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
